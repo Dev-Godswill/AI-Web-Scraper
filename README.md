@@ -22,14 +22,14 @@ This project involves several programming skills such as:
 
 ## Code Segments Breakdown:
 a. **main.py**
-      import streamlit as st
+      **import streamlit as st
       from scrape import (
           scrape_website,
           extract_body_content,
           clean_body_content,
           split_dom_content,
       )
-      from parse import parse_with_openai
+      from parse import parse_with_openai**
 
 
 * **API Integration:** Integrating Google’s Generative AI API for content generation.
