@@ -3,7 +3,6 @@
 ## Table of Contents
 - [Code Breakdown and Overview](#code-breakdown-and-overview)
 - [Code Segments Breakdown](#code-segments-breakdown)
-- [Skills Acquired](#skills-acquired)
 - [Technologies Used](#technologies-used)
 - [How To Run the Code](#how-to-run-the-code)
 - [Contributing](#contributing)
@@ -22,70 +21,89 @@ This project involves several programming skills such as:
 
 ## Code Segments Breakdown:
 a. **main.py**
-      **import streamlit as st
-      from scrape import (
-          scrape_website,
-          extract_body_content,
-          clean_body_content,
-          split_dom_content,
-      )
-      from parse import parse_with_openai**
+This is the main application file where the Streamlit interface is set up. It collects user input (URL and query) and displays the results of the scraping and parsing.
 
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/27.png?raw=true">
+* Imports necessary functions from the scrape.py and parse.py files.
+* UI Elements: Uses Streamlit’s st.text_input() and st.button() to collect the website URL and the query for parsing.
 
-* **API Integration:** Integrating Google’s Generative AI API for content generation.
-* **Web Development with Streamlit:** Building interactive web apps with file uploads, user inputs, and downloadable results.
-* **PDF Generation:** Utilizing FPDF to convert generated questions into a professional-looking PDF.
-* **Error Handling:** Managing different file encodings and edge cases during text extraction.
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/28.png?raw=true">
+* Displays a simple UI title and input box for users to enter the URL of the website they want to scrape.
+* Scrape the Website: When the "Scrape Website" button is clicked, the program scrapes the webpage and displays the DOM content.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/29.png?raw=true">
+* Parse the Content: If content has been scraped, the user can input a description of what they want to extract from the content using OpenAI’s GPT model.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/30.png?raw=true">
+This parses the content and displays the result using OpenAI based on the user’s description.
+
+b. **parse.py**
+This file contains the logic for **parsing web content** using the OpenAI API.
+
+* **API Configuration:**
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/31.png?raw=true">
+* **Prompt Template:** The template defines the structure of the input sent to OpenAI, ensuring only the desired information is extracted based on the user description.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/32.png?raw=true">
+
+* **parse_with_openai function:** This function sends chunks of the scraped content to the OpenAI model and retrieves the parsed results.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/33.png?raw=true">
+
+c. **scrape.py**
+
+This file contains the logic for web scraping using Selenium and BeautifulSoup.
+
+* **Selenium Setup:**
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/34.png?raw=true">
+
+* **scrape_website function:** This function uses Selenium to access the target website and retrieve its HTML content.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/35.png?raw=true">
+
+* **extract_body_content and clean_body_content functions:** These functions use BeautifulSoup to extract and clean the text content of the webpage.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/36.png?raw=true">
+
+* **split_dom_content:** This function splits the DOM content into smaller chunks to handle large text inputs for processing by the OpenAI API.
+
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/37.png?raw=true">
 
 ## Technologies Used
-* **Streamlit:** Used to create the web interface for uploading documents, interacting with users, and displaying MCQs.
-* **pdfplumber:** A library for extracting text from PDF documents.
-* **python-docx:** Extracts text from DOCX (Microsoft Word) files.
-* **FPDF:** A lightweight library to generate PDF files.
-* **Google Generative AI (Gemini Model):** This API is used to generate the actual MCQs from the text provided by the user.
-* **OS Module:** Handles file paths and directory creation.
+* **Streamlit:** Used for building a simple and interactive user interface.
+* **Selenium:** Automates the process of opening a browser, navigating to a webpage, and scraping its content.
+* **BeautifulSoup:** Extracts and processes specific HTML elements from the webpage.
+* **OpenAI API:** Leverages GPT models for processing and extracting information from the scraped content.
+* **Python Dotenv:** Loads environment variables, such as the OpenAI API key, from a .env file.
 
 ## How To Run the Code
-To run the code on your local machine, follow these steps:
+**Prerequisites:**
+1. **Python Installation:** Make sure Python 3.x is installed on your system.
+2. **Chromium WebDriver:** Install Chromium and configure it for Selenium scraping.
+3. **OpenAI API Key:** Sign up for OpenAI and get your API key to use GPT models.
 
-**Step 1: Clone the Repository and Install Requirements**
+**Steps:**
+1. **Install Required Libraries:**
+     * Create a requirements.txt file with the necessary libraries (e.g., Selenium, BeautifulSoup, OpenAI, Streamlit).
+     * Install dependencies using:
 
-1. Clone the project repository or copy the code to your local machine.
-2. Ensure you have Python installed.
-3. Create a virtual environment (optional but recommended):
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/38.png?raw=true">
 
-<img width="722" alt="MCQ-Generator" src="https://github.com/Dev-Godswill/picture-files/blob/main/23.png?raw=true">
+2. **Set Up Environment Variables:**
+     * Create a .env file and add your OpenAI API key:
 
-    Then, activate the virtual environment:
-      **Windows:** env\Scripts\activate
-      **Mac/Linux:** source env/bin/activate
-      
-4. Install the required Python libraries. If you have a requirements.txt file (as you do), you can install the dependencies directly:
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/39.png?raw=true">
 
-<img width="722" alt="MCQ-Generator" src="https://github.com/Dev-Godswill/picture-files/blob/main/24.png?raw=true">
+3. **Run the Streamlit Application:**
+     * In the terminal, navigate to the project directory and run:
 
-**Step 2: Set up API Key**
-The project requires an API key to access Google’s Generative AI model. You must set up your **Google API Key** and place it in your environment as follows:
+<img width="722" alt="webscraper" src="https://github.com/Dev-Godswill/picture-files/blob/main/40.png?raw=true">
 
-1. Go to Google Cloud Console and generate an API key for the Gemini Model.
-2. Update the code where the GOOGLE_API_KEY is required:
-
-<img width="722" alt="MCQ-Generator" src="https://github.com/Dev-Godswill/picture-files/blob/main/25.png?raw=true">
-
-**Step 3: Run the Streamlit Application**
-Once the environment is set up and dependencies are installed, run the Streamlit web app using the following command:
-
-<img width="722" alt="MCQ-Generator" src="https://github.com/Dev-Godswill/picture-files/blob/main/26.png?raw=true">
-
-Replace your_script_name.py with the name of the script that contains the code above.
-
-**Step 4: Access the Web Interface**
-After running the Streamlit app, a URL will be provided in your terminal (usually http://localhost:8501). Open this in your web browser to start using the MCQ generator.
-
-**Step 5: Upload Files and Generate MCQs**
-* Upload a text document in PDF, DOCX, or TXT format.
-* Specify the number of questions you want to generate.
-* Download the MCQs as TXT or PDF files.
+4. **Access the Application:**
+     * Open the provided local URL (usually http://localhost:8501) in your browser.
+     * Input a website URL and describe the data you want to extract. The application will scrape the webpage and parse the content using OpenAI.
 
 ## Contributing
 Contributions to this project is welcome! If you'd like to contribute, please follow these steps:
